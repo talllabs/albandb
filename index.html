@@ -1,128 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>PH18 Guest Stay Request</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 720px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    h1 {
-      margin-bottom: 8px;
-    }
-    p {
-      color: #555;
-    }
-    label {
-      display: block;
-      margin-top: 18px;
-      font-weight: bold;
-    }
-    input,
-    textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 6px;
-      box-sizing: border-box;
-    }
-    textarea {
-      min-height: 80px;
-    }
-    button {
-      margin-top: 28px;
-      padding: 14px;
-      font-size: 16px;
-      width: 100%;
-      cursor: pointer;
-    }
-    .checkbox {
-      margin-top: 16px;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>albandb - Guest Stay Request</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary: #ff5a5f; /* Airbnb-ish red */
+            --dark: #222;
+            --light: #f7f7f7;
+            --white: #fff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--primary); }
 
+        /* Sections */
+        section { padding: 3rem 1rem; max-width: 800px; margin: 0 auto; }
+        h1, h2 { text-align: center; }
+        
+        /* Gallery Placeholder */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            background: #ddd;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border-radius: 8px;
+        }
+
+        /* Calendar Responsive Wrapper */
+        .calendar-wrapper {
+            position: relative;
+            padding-bottom: 75%; /* Aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .calendar-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Form Styling */
+        form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+        }
+        .file-upload-note { font-size: 0.85rem; color: #666; margin-top: 5px; }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        button:hover { background-color: #e04e53; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: var(--white);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 600px) {
+            nav { flex-direction: column; gap: 10px; }
+            .nav-links { margin-top: 10px; }
+        }
+    </style>
+</head>
 <body>
 
-<h1>PH18 Guest Stay Request</h1>
-<p>If you haven't already, please check available dates before submitting this request.</p>
+    <nav>
+        <div class="logo">albandb</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#calendar">Calendar</a>
+            <a href="#request">Request a Stay</a>
+        </div>
+    </nav>
 
-<form
-  name="ph18-guest-stay"
-  method="POST"
-  data-netlify="true"
-  data-netlify-honeypot="bot-field"
-  enctype="multipart/form-data"
->
+    <section id="home">
+        <h1>Welcome to PH18</h1>
+        <p style="text-align: center;">A comfortable stay awaits you.</p>
+    </section>
 
-  <!-- Required for Netlify -->
-  <input type="hidden" name="form-name" value="ph18-guest-stay" />
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">Bedroom 1</div>
+            <div class="gallery-item">Living Room</div>
+            <div class="gallery-item">Kitchen</div>
+            <div class="gallery-item">Exterior</div>
+        </div>
+    </section>
 
-  <!-- Honeypot field -->
-  <p class="hidden">
-    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-  </p>
+    <section id="calendar">
+        <h2>Calendar of Availability</h2>
+        <p style="text-align: center; margin-bottom: 20px;">Please check available dates before submitting a request.</p>
+        <div class="calendar-wrapper">
+            <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_bvrfcjlosao140avj16q306d2o@group.calendar.google.com&ctz=America/Los_Angeles"></iframe>
+        </div>
+    </section>
 
-  <label>Your Name</label>
-  <input type="text" name="first_name" placeholder="First Name" required />
-  <input type="text" name="last_name" placeholder="Last Name" required />
+    <section id="request">
+        <h2>PH18 Guest Stay Request</h2>
+        
+        <form action="https://formsubmit.co/connect@sgmnd.org" method="POST" enctype="multipart/form-data">
+            
+            <input type="hidden" name="_subject" value="New PH18 Stay Request">
+            
+            <input type="hidden" name="_template" value="table">
+            
+            <input type="text" name="_honey" style="display:none">
+            
+            <input type="hidden" name="_captcha" value="false">
 
-  <label>Additional Guest Names</label>
-  <textarea name="additional_guests"></textarea>
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
 
-  <label>Phone Number</label>
-  <input type="tel" name="phone" placeholder="(000) 000-0000" required />
+            <div class="form-group">
+                <label for="guests">Additional Guest Names</label>
+                <textarea id="guests" name="guests" rows="2"></textarea>
+            </div>
 
-  <label>Email</label>
-  <input type="email" name="email" placeholder="example@example.com" required />
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
 
-  <label>Arrival – Date and Time</label>
-  <input type="datetime-local" name="arrival" required />
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
 
-  <label>Departure – Date and Time</label>
-  <input type="datetime-local" name="departure" required />
+            <div class="form-group">
+                <label for="arrival">Arrival – Date and Time</label>
+                <input type="datetime-local" id="arrival" name="arrival" required>
+            </div>
 
-  <label>Please check which rooms you will need</label>
-  <textarea name="rooms_needed" required></textarea>
+            <div class="form-group">
+                <label for="departure">Departure – Date and Time</label>
+                <input type="datetime-local" id="departure" name="departure" required>
+            </div>
 
-  <label>License Plate Number</label>
-  <input type="text" name="license_plate" />
+            <div class="form-group">
+                <label>Please check which rooms you will need</label>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <label style="font-weight: normal;"><input type="checkbox" name="rooms[]" value="Master"> Master</label>
+                    <label style="font-weight: normal;"><input type="checkbox" name="rooms[]" value="Guest 1"> Guest 1</label>
+                    <label style="font-weight: normal;"><input type="checkbox" name="rooms[]" value="Guest 2"> Guest 2</label>
+                </div>
+            </div>
 
-  <label>Make & Model of Vehicle</label>
-  <input type="text" name="vehicle" />
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <h3>Vehicle & ID Information</h3>
 
-  <label>Upload FRONT of Driver’s License</label>
-  <input type="file" name="license_front" accept="image/*" />
+            <div class="form-group">
+                <label for="plate">License Plate Number</label>
+                <input type="text" id="plate" name="license_plate">
+            </div>
 
-  <label>Upload BACK of Driver’s License</label>
-  <input type="file" name="license_back" accept="image/*" />
+            <div class="form-group">
+                <label for="car_model">Make & Model of Vehicle</label>
+                <input type="text" id="car_model" name="vehicle_model">
+            </div>
 
-  <label>Additional Vehicle Details (if any)</label>
-  <textarea name="additional_vehicle"></textarea>
+            <div class="form-group">
+                <label for="id_front">Upload FRONT of Driver’s License</label>
+                <input type="file" id="id_front" name="id_front" accept="image/*,.pdf" required>
+            </div>
 
-  <label>Any Additional Details?</label>
-  <textarea name="notes"></textarea>
+            <div class="form-group">
+                <label for="id_back">Upload BACK of Driver’s License</label>
+                <input type="file" id="id_back" name="id_back" accept="image/*,.pdf" required>
+            </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" required />
-      Please verify that you are human
-    </label>
-  </div>
+            <div class="form-group">
+                <label for="vehicle_details">Additional Vehicle Details (if any)</label>
+                <textarea id="vehicle_details" name="vehicle_details" rows="2"></textarea>
+            </div>
 
-  <button type="submit">Send Request</button>
+            <div class="form-group">
+                <label for="details">Any Additional Details?</label>
+                <textarea id="details" name="details" rows="3"></textarea>
+            </div>
 
-</form>
+            <button type="submit">Send Request</button>
+        </form>
+    </section>
 
-<p style="margin-top: 24px; font-size: 14px; color: #666;">
-Thank you for completing the request to stay at PH18. We will review availability and, if approved, send a confirmation email with check-in details and further instructions.
-</p>
+    <footer>
+        <p>Thank you for completing the request to stay at PH18. <br>We will review availability and, if approved, send a confirmation email with check-in details and further instructions.</p>
+    </footer>
 
 </body>
 </html>
