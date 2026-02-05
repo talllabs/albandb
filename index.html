@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +107,7 @@
         /* --- CONTENT SECTIONS --- */
         section {
             padding: 5rem 1.5rem;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             scroll-margin-top: 80px; 
         }
@@ -129,8 +130,8 @@
         /* --- GALLERY GRID --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
         .gallery-item {
             background: rgba(255,255,255,0.1);
@@ -142,21 +143,22 @@
         .gallery-item:hover {
             transform: scale(1.02);
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            z-index: 10;
         }
         .gallery-item img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             display: block;
         }
         .gallery-caption {
-            padding: 15px;
+            padding: 10px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #ddd;
         }
 
-        /* --- LIGHTBOX (Hidden by default) --- */
+        /* --- LIGHTBOX STYLES --- */
         .lightbox {
             display: none;
             position: fixed;
@@ -199,12 +201,35 @@
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;
+            z-index: 2001;
         }
         .close:hover, .close:focus {
             color: #bbb;
             text-decoration: none;
             cursor: pointer;
         }
+        
+        /* Lightbox Arrows */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 40px;
+            transition: 0.3s ease;
+            user-select: none;
+            z-index: 2001;
+        }
+        .next { right: 0; }
+        .prev { left: 0; }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
         @keyframes zoom {
             from {transform:scale(0)} 
             to {transform:scale(1)}
@@ -249,7 +274,6 @@
             font-size: 1rem;
         }
         
-        /* Custom Checkbox Styling */
         .checkbox-group {
             display: flex;
             gap: 20px;
@@ -263,7 +287,7 @@
             cursor: pointer;
         }
         .checkbox-label input {
-            width: auto; /* Reset width for checkboxes */
+            width: auto; 
             margin: 0;
         }
 
@@ -301,6 +325,7 @@
             .nav-btn { font-size: 0.75rem; padding: 8px 12px; }
             form { padding: 1.5rem; }
             .checkbox-group { flex-direction: column; gap: 10px; }
+            .prev, .next { font-size: 30px; padding: 10px; } /* Smaller arrows on mobile */
         }
     </style>
 </head>
@@ -329,12 +354,24 @@
                 <div class="gallery-caption">Marina View</div>
             </div>
             <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/b8c2e52f.jpg" alt="Exterior View">
+                <div class="gallery-caption">Exterior View</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/ef3d1289.jpg" alt="Exterior View">
+                <div class="gallery-caption">Exterior View</div>
+            </div>
+            <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/b5bf9943.jpg" alt="Sitting Room">
                 <div class="gallery-caption">Sitting Room</div>
             </div>
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/d6985984.jpg" alt="Terrace">
                 <div class="gallery-caption">Terrace</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/cd59a0ab.jpg" alt="Detail View">
+                <div class="gallery-caption">Detail View</div>
             </div>
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/5cdb361c.jpg" alt="Kitchen">
@@ -345,6 +382,10 @@
                 <div class="gallery-caption">Dining Room</div>
             </div>
             <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/cf4e5df5.jpg" alt="Detail View">
+                <div class="gallery-caption">Detail View</div>
+            </div>
+            <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/724b79bf.jpg" alt="Master Bedroom">
                 <div class="gallery-caption">Master Bedroom</div>
             </div>
@@ -353,14 +394,36 @@
                 <div class="gallery-caption">Ensuite Bathroom</div>
             </div>
             <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/9d2be4a3.jpg" alt="Master Ensuite">
+                <div class="gallery-caption">Master Ensuite</div>
+            </div>
+            <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/c91c57c2.jpg" alt="Second Bedroom">
                 <div class="gallery-caption">Second Bedroom</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/6320cc80.jpg" alt="Second Bed Ensuite">
+                <div class="gallery-caption">Second Bed Ensuite</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/b6a575ec.jpg" alt="Marina View">
+                <div class="gallery-caption">Marina View</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/c5aec6ad.jpg" alt="Location Map">
+                <div class="gallery-caption">Location Map</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/548ee2a4.jpg" alt="Location Map">
+                <div class="gallery-caption">Location Map</div>
             </div>
         </div>
     </section>
 
     <div id="myLightbox" class="lightbox">
         <span class="close">&times;</span>
+        <a class="prev" id="prevBtn">&#10094;</a>
+        <a class="next" id="nextBtn">&#10095;</a>
         <img class="lightbox-content" id="img01">
         <div id="lightbox-caption"></div>
     </div>
@@ -375,93 +438,71 @@
 
     <section id="request">
         <h2>Request a Stay</h2>
-        
         <form action="https://formsubmit.co/167edc1ce87f4b42cd1a27aa2440735e" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="_subject" value="New PH18 Stay Request">
             <input type="hidden" name="_template" value="table">
             <input type="text" name="_honey" style="display:none">
             <input type="hidden" name="_captcha" value="false">
-            
             <input type="hidden" name="_next" value="https://albanb.com">
 
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
-
             <div class="form-group">
                 <label for="guests">Additional Guest Names</label>
                 <textarea id="guests" name="guests" rows="2"></textarea>
             </div>
-
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone">
             </div>
-
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
-
             <div class="form-group">
                 <label for="arrival">Arrival – Date and Time</label>
                 <input type="datetime-local" id="arrival" name="arrival" required>
             </div>
-
             <div class="form-group">
                 <label for="departure">Departure – Date and Time</label>
                 <input type="datetime-local" id="departure" name="departure" required>
             </div>
-
             <div class="form-group">
                 <label>Please check which rooms you will need <span style="font-weight:normal; font-size:0.8rem;">(Select at least one)</span></label>
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="rooms[]" value="Master Bedroom & Bath"> 
-                        Master Bedroom & Bath
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="rooms[]" value="Guest Room & Bath"> 
-                        Guest Room & Bath
-                    </label>
+                    <label class="checkbox-label"><input type="checkbox" name="rooms[]" value="Master Bedroom & Bath"> Master Bedroom & Bath</label>
+                    <label class="checkbox-label"><input type="checkbox" name="rooms[]" value="Guest Room & Bath"> Guest Room & Bath</label>
                 </div>
             </div>
-
             <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
             <h3 style="margin-top:0; color: #333;">Vehicle & ID Information</h3>
-
             <div class="form-group">
                 <label for="plate">License Plate Number</label>
                 <input type="text" id="plate" name="license_plate">
             </div>
-
             <div class="form-group">
                 <label for="car_model">Make & Model of Vehicle</label>
                 <input type="text" id="car_model" name="vehicle_model">
             </div>
-
             <div class="form-group">
                 <label for="id_front">Upload FRONT of Driver’s License</label>
                 <input type="file" id="id_front" name="id_front" accept="image/*,.pdf">
             </div>
-
             <div class="form-group">
                 <label for="id_back">Upload BACK of Driver’s License</label>
                 <input type="file" id="id_back" name="id_back" accept="image/*,.pdf">
             </div>
-
             <div class="form-group">
                 <label for="vehicle_details">Additional Vehicle Details (if any)</label>
                 <textarea id="vehicle_details" name="vehicle_details" rows="2"></textarea>
             </div>
-
             <div class="form-group">
                 <label for="details">Any Additional Details?</label>
                 <textarea id="details" name="details" rows="3"></textarea>
             </div>
-
             <button type="submit">Send Request</button>
         </form>
     </section>
@@ -472,42 +513,76 @@
     </footer>
 
     <script>
-        // --- Lightbox Logic ---
+        // --- Lightbox Variables ---
         var modal = document.getElementById("myLightbox");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("lightbox-caption");
-        var images = document.querySelectorAll(".gallery-item img");
+        var galleryImages = document.querySelectorAll(".gallery-item img");
+        var currentIndex = 0;
 
-        images.forEach(function(img) {
-            img.onclick = function(){
-                modal.style.display = "flex";
-                modalImg.src = this.src;
-                captionText.innerHTML = this.alt;
+        // --- Functions ---
+
+        // Open specific image by index
+        function showImage(index) {
+            if (index >= galleryImages.length) { index = 0; } // Loop to start
+            if (index < 0) { index = galleryImages.length - 1; } // Loop to end
+            
+            currentIndex = index;
+            modal.style.display = "flex";
+            modalImg.src = galleryImages[currentIndex].src;
+            captionText.innerHTML = galleryImages[currentIndex].alt;
+        }
+
+        // --- Event Listeners ---
+
+        // 1. Click on Gallery Image
+        galleryImages.forEach(function(img, index) {
+            img.onclick = function() {
+                showImage(index);
             }
         });
 
+        // 2. Click Close Button
         var span = document.getElementsByClassName("close")[0];
         span.onclick = function() { modal.style.display = "none"; }
+
+        // 3. Click Background to Close
         modal.onclick = function(event) {
             if (event.target === modal) { modal.style.display = "none"; }
         }
 
-        // --- Checkbox Validation (Must select at least one) ---
+        // 4. Click Next/Prev Buttons
+        document.getElementById("prevBtn").onclick = function(e) {
+            e.stopPropagation(); // Prevent closing modal
+            showImage(currentIndex - 1);
+        }
+        document.getElementById("nextBtn").onclick = function(e) {
+            e.stopPropagation();
+            showImage(currentIndex + 1);
+        }
+
+        // 5. Keyboard Navigation (Left, Right, Escape)
+        document.addEventListener('keydown', function(event) {
+            if (modal.style.display === "flex") {
+                if (event.key === "ArrowLeft") {
+                    showImage(currentIndex - 1);
+                } else if (event.key === "ArrowRight") {
+                    showImage(currentIndex + 1);
+                } else if (event.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            }
+        });
+
+        // --- Checkbox Validation ---
         const checkboxes = document.querySelectorAll('input[name="rooms[]"]');
-        
         function validateCheckboxes() {
             const isChecked = Array.from(checkboxes).some(cb => cb.checked);
             checkboxes.forEach(cb => {
-                // If nothing is checked, make them all required.
-                // If one is checked, remove required from all.
                 cb.required = !isChecked;
             });
         }
-
-        // Run checking on every click
         checkboxes.forEach(cb => cb.addEventListener('change', validateCheckboxes));
-        
-        // Run once on load to set initial state
         validateCheckboxes();
     </script>
 
