@@ -1,85 +1,97 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>albandb</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         /* --- CSS STYLES --- */
         :root {
-            --bg-color: #363657; /* Dark purple from screenshot */
-            --text-color: #ffffff;
-            --accent: #ffffff;
-            --form-bg: #ffffff;
-            --form-text: #333333;
+            --bg-color: #2e2e48; /* Slightly richer, deeper purple */
+            --text-color: #f4f4f4; /* Soft off-white */
+            --accent-gold: #d4af37; /* Luxury Gold */
+            --glass-bg: rgba(20, 20, 35, 0.6); /* Dark semi-transparent */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --input-border: rgba(255, 255, 255, 0.3);
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            line-height: 1.7;
             background-color: var(--bg-color);
             color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- HERO SECTION --- */
         header {
-            padding: 4rem 2rem 2rem 2rem;
+            padding: 6rem 2rem 4rem 2rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            animation: fadeIn 1.2s ease-out;
         }
 
         /* Circular Profile Image */
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 2rem;
-            border: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-gold); /* Gold border */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            padding: 5px; /* Spacing between image and border */
         }
 
         /* Main Title */
         h1 {
-            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
             font-weight: 400;
-            letter-spacing: 2px;
+            letter-spacing: 5px; /* Wider tracking for elegance */
             margin: 0;
             margin-bottom: 1.5rem;
+            color: #fff;
         }
 
         /* Divider Line */
         .divider {
-            width: 100px;
-            height: 1px;
-            background-color: rgba(255,255,255,0.3);
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-gold);
             border: none;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         /* --- STICKY NAVIGATION BAR --- */
         nav {
-            position: -webkit-sticky; /* Safari */
+            position: -webkit-sticky;
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: var(--bg-color);
-            padding: 1rem 0;
+            background: rgba(46, 46, 72, 0.95); /* High opacity background */
+            backdrop-filter: blur(10px); /* Blur effect behind nav */
+            padding: 1.2rem 0;
             width: 100%;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .nav-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 25px;
             flex-wrap: wrap;
             max-width: 1000px;
             margin: 0 auto;
@@ -87,163 +99,195 @@
         }
 
         .nav-btn {
-            padding: 10px 20px;
-            border: 1px solid white;
-            color: white;
+            font-family: 'Montserrat', sans-serif;
+            padding: 8px 0;
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-            border-radius: 4px;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            font-weight: 500;
             transition: all 0.3s ease;
-            white-space: nowrap;
+            position: relative;
+            border: none;
+        }
+
+        /* Underline animation on hover */
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
         .nav-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            color: #fff;
+        }
+        
+        .nav-btn:hover::after {
+            width: 100%;
         }
 
         /* --- CONTENT SECTIONS --- */
         section {
-            padding: 5rem 1.5rem;
-            max-width: 1000px;
+            padding: 6rem 1.5rem;
+            max-width: 1100px;
             margin: 0 auto;
             scroll-margin-top: 80px; 
         }
 
         h2 {
-            font-size: 2rem;
-            font-weight: 300;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            font-style: italic;
             text-align: center;
-            margin-bottom: 3rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 1rem;
-            display: inline-block;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-bottom: 4rem;
+            color: #fff;
+            display: block;
         }
 
         /* --- GALLERY GRID --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2px; /* Minimal gap for high-end magazine look */
         }
         .gallery-item {
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
+            position: relative;
             overflow: hidden;
-            transition: transform 0.3s;
             cursor: pointer;
+            aspect-ratio: 1 / 1; /* Square images look very uniform/modern */
         }
-        .gallery-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-            z-index: 10;
-        }
+        
         .gallery-item img {
             width: 100%;
-            height: 180px;
+            height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.6s ease;
+            filter: brightness(0.9);
         }
-        .gallery-caption {
-            padding: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #ddd;
+        
+        /* Zoom effect on hover */
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1);
         }
 
-        /* --- LIGHTBOX STYLES --- */
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- LIGHTBOX --- */
         .lightbox {
             display: none;
             position: fixed;
             z-index: 2000;
-            padding-top: 50px;
+            padding-top: 0;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(10, 10, 15, 0.95); /* Very dark overlay */
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            backdrop-filter: blur(5px);
         }
         .lightbox-content {
             margin: auto;
             display: block;
-            max-width: 90%;
-            max-height: 80vh;
-            border-radius: 4px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            animation: zoom 0.3s;
+            max-width: 95%;
+            max-height: 85vh;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: zoom 0.4s ease-out;
         }
         #lightbox-caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
+            margin-top: 20px;
+            color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
-            font-weight: 300;
+            letter-spacing: 1px;
+            font-style: italic;
         }
         .close {
             position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 50px;
+            font-weight: 100;
             transition: 0.3s;
             cursor: pointer;
             z-index: 2001;
+            line-height: 0.5;
         }
-        .close:hover, .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
+        .close:hover { color: var(--accent-gold); }
         
-        /* Lightbox Arrows */
         .prev, .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 40px;
+            padding: 20px;
+            margin-top: -30px;
+            color: rgba(255,255,255,0.5);
+            font-size: 30px;
             transition: 0.3s ease;
             user-select: none;
             z-index: 2001;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .next { right: 0; }
-        .prev { left: 0; }
+        .next { right: 30px; }
+        .prev { left: 30px; }
         .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            background: transparent;
         }
 
         @keyframes zoom {
-            from {transform:scale(0)} 
-            to {transform:scale(1)}
+            from {transform:scale(0.95); opacity: 0;} 
+            to {transform:scale(1); opacity: 1;}
         }
 
         /* --- CALENDAR --- */
         .calendar-wrapper {
             position: relative;
-            padding-bottom: 75%;
+            padding-bottom: 60%;
             height: 0;
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background: #fff; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
         }
         .calendar-wrapper iframe {
             position: absolute;
@@ -252,80 +296,117 @@
             width: 100%;
             height: 100%;
             border: 0;
+            filter: grayscale(1) invert(0); /* Optional: makes calendar look cleaner */
         }
 
-        /* --- FORM --- */
+        /* --- FORM (Glassmorphism) --- */
         form {
-            background: var(--form-bg);
-            color: var(--form-text);
-            padding: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 4rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
-        .form-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group { margin-bottom: 2.5rem; }
+        
+        label { 
+            display: block; 
+            margin-bottom: 0.8rem; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: rgba(255,255,255,0.6); 
+        }
+        
+        /* Minimalist Input Styles */
         input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"], textarea, select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--input-border);
+            border-radius: 0;
             box-sizing: border-box; 
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #fff;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* File Upload Styling */
+        input[type="file"] {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
         }
         
         .checkbox-group {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
+            padding-top: 10px;
         }
         .checkbox-label {
             font-weight: normal;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
         }
         .checkbox-label input {
             width: auto; 
             margin: 0;
+            accent-color: var(--accent-gold);
+            transform: scale(1.2);
         }
 
         button[type="submit"] {
-            background-color: var(--bg-color);
-            color: white;
-            padding: 15px 24px;
-            border: none;
-            border-radius: 4px;
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 18px 30px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 0;
             cursor: pointer;
             width: 100%;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background 0.3s;
-            margin-top: 1rem;
+            letter-spacing: 3px;
+            transition: all 0.4s ease;
+            margin-top: 2rem;
         }
         button[type="submit"]:hover { 
-            background-color: #4a4a75; 
+            background-color: var(--accent-gold);
+            color: #1a1a2e;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         footer {
             text-align: center;
-            padding: 3rem;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 4rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4rem;
+            border-top: 1px solid var(--glass-border);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 3rem; }
-            .nav-container { flex-direction: row; justify-content: center; }
-            .nav-btn { font-size: 0.75rem; padding: 8px 12px; }
-            form { padding: 1.5rem; }
-            .checkbox-group { flex-direction: column; gap: 10px; }
-            .prev, .next { font-size: 30px; padding: 10px; } /* Smaller arrows on mobile */
+            h1 { font-size: 3rem; letter-spacing: 2px; }
+            .nav-container { flex-wrap: wrap; gap: 15px; }
+            .nav-btn { font-size: 0.7rem; }
+            section { padding: 4rem 1.5rem; }
+            form { padding: 2rem; }
+            .checkbox-group { flex-direction: column; gap: 15px; }
+            .prev, .next { width: 40px; height: 40px; font-size: 20px; padding: 0; }
         }
     </style>
 </head>
@@ -347,43 +428,43 @@
     </nav>
 
     <section id="gallery">
-        <h2>Gallery</h2>
+        <h2>The Gallery</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/075e93ce.jpg" alt="Marina View">
                 <div class="gallery-caption">Marina View</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/b8c2e52f.jpg" alt="Interior View">
-                <div class="gallery-caption">Interior View</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/b8c2e52f.jpg" alt="Exterior View">
+                <div class="gallery-caption">Exterior View</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/ef3d1289.jpg" alt="Sitting Room">
-                <div class="gallery-caption">Sitting Room</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/ef3d1289.jpg" alt="Exterior View">
+                <div class="gallery-caption">Exterior View</div>
             </div>
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/b5bf9943.jpg" alt="Sitting Room">
                 <div class="gallery-caption">Sitting Room</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/d6985984.jpg" alt="Outdoor Area">
-                <div class="gallery-caption">Outdoor Area</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/d6985984.jpg" alt="Terrace">
+                <div class="gallery-caption">Terrace</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/cd59a0ab.jpg" alt="Dining Area">
-                <div class="gallery-caption">Dining Area</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/cd59a0ab.jpg" alt="Detail View">
+                <div class="gallery-caption">Detail View</div>
             </div>
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/5cdb361c.jpg" alt="Kitchen">
                 <div class="gallery-caption">Kitchen</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/5793c68c.jpg" alt="Dining Area">
-                <div class="gallery-caption">Dining Area</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/5793c68c.jpg" alt="Dining Room">
+                <div class="gallery-caption">Dining Room</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/cf4e5df5.jpg" alt="Ground Floor Bathroom">
-                <div class="gallery-caption">Ground Floor Bathroom</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/cf4e5df5.jpg" alt="Detail View">
+                <div class="gallery-caption">Detail View</div>
             </div>
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/724b79bf.jpg" alt="Master Bedroom">
@@ -398,34 +479,39 @@
                 <div class="gallery-caption">Master Ensuite</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/c91c57c2.jpg" alt="Guest Bedroom">
-                <div class="gallery-caption">Guest Bedroom</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/c91c57c2.jpg" alt="Second Bedroom">
+                <div class="gallery-caption">Second Bedroom</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/6320cc80.jpg" alt="Guest Bedroom Ensuite">
-                <div class="gallery-caption">Guest Bedroom Ensuite</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/6320cc80.jpg" alt="Second Bed Ensuite">
+                <div class="gallery-caption">Second Bed Ensuite</div>
             </div>
             <div class="gallery-item">
                 <img src="https://albandb.carrd.co/assets/images/gallery01/b6a575ec.jpg" alt="Marina View">
                 <div class="gallery-caption">Marina View</div>
             </div>
             <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/c5aec6ad.jpg" alt="Aerial View">
-                <div class="gallery-caption">Aerial View</div>
+                <img src="https://albandb.carrd.co/assets/images/gallery01/c5aec6ad.jpg" alt="Location Map">
+                <div class="gallery-caption">Location Map</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.carrd.co/assets/images/gallery01/548ee2a4.jpg" alt="Location Map">
+                <div class="gallery-caption">Location Map</div>
+            </div>
         </div>
     </section>
 
     <div id="myLightbox" class="lightbox">
         <span class="close">&times;</span>
-        <a class="prev" id="prevBtn">&#10094;</a>
-        <a class="next" id="nextBtn">&#10095;</a>
+        <div class="prev" id="prevBtn">&#10094;</div>
+        <div class="next" id="nextBtn">&#10095;</div>
         <img class="lightbox-content" id="img01">
         <div id="lightbox-caption"></div>
     </div>
 
     <section id="calendar">
-        <h2>Calendar of Availability</h2>
-        <p style="text-align: center; margin-bottom: 30px;">Please check available dates before submitting a request.</p>
+        <h2>Availability</h2>
+        <p style="text-align: center; margin-bottom: 40px; font-family: 'Montserrat'; font-size: 0.9rem; color: rgba(255,255,255,0.7);">Please review available dates below.</p>
         <div class="calendar-wrapper">
             <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_bvrfcjlosao140avj16q306d2o@group.calendar.google.com&ctz=America/Los_Angeles"></iframe>
         </div>
@@ -447,64 +533,74 @@
             </div>
             <div class="form-group">
                 <label for="guests">Additional Guest Names</label>
-                <textarea id="guests" name="guests" rows="2"></textarea>
+                <textarea id="guests" name="guests" rows="1"></textarea>
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone">
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <div class="form-group">
-                <label for="arrival">Arrival – Date and Time</label>
-                <input type="datetime-local" id="arrival" name="arrival" required>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="form-group">
+                    <label for="arrival">Arrival Date & Time</label>
+                    <input type="datetime-local" id="arrival" name="arrival" required>
+                </div>
+                <div class="form-group">
+                    <label for="departure">Departure Date & Time</label>
+                    <input type="datetime-local" id="departure" name="departure" required>
+                </div>
             </div>
+
             <div class="form-group">
-                <label for="departure">Departure – Date and Time</label>
-                <input type="datetime-local" id="departure" name="departure" required>
-            </div>
-            <div class="form-group">
-                <label>Please check which rooms you will need <span style="font-weight:normal; font-size:0.8rem;">(Select at least one)</span></label>
+                <label>Room Selection <span style="font-weight:normal; opacity: 0.5; text-transform:none;">(Select at least one)</span></label>
                 <div class="checkbox-group">
                     <label class="checkbox-label"><input type="checkbox" name="rooms[]" value="Master Bedroom & Bath"> Master Bedroom & Bath</label>
                     <label class="checkbox-label"><input type="checkbox" name="rooms[]" value="Guest Room & Bath"> Guest Room & Bath</label>
                 </div>
             </div>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-            <h3 style="margin-top:0; color: #333;">Vehicle & ID Information</h3>
-            <div class="form-group">
-                <label for="plate">License Plate Number</label>
-                <input type="text" id="plate" name="license_plate">
+            
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 50px 0;">
+            
+            <h3 style="margin: 0 0 30px 0; font-family: 'Playfair Display'; font-weight: 400; font-size: 1.5rem; color: #fff;">Vehicle & ID Details</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="form-group">
+                    <label for="plate">License Plate</label>
+                    <input type="text" id="plate" name="license_plate">
+                </div>
+                <div class="form-group">
+                    <label for="car_model">Vehicle Make/Model</label>
+                    <input type="text" id="car_model" name="vehicle_model">
+                </div>
             </div>
+
             <div class="form-group">
-                <label for="car_model">Make & Model of Vehicle</label>
-                <input type="text" id="car_model" name="vehicle_model">
-            </div>
-            <div class="form-group">
-                <label for="id_front">Upload FRONT of Driver’s License</label>
+                <label for="id_front">Driver’s License (Front)</label>
                 <input type="file" id="id_front" name="id_front" accept="image/*,.pdf">
             </div>
             <div class="form-group">
-                <label for="id_back">Upload BACK of Driver’s License</label>
+                <label for="id_back">Driver’s License (Back)</label>
                 <input type="file" id="id_back" name="id_back" accept="image/*,.pdf">
             </div>
             <div class="form-group">
-                <label for="vehicle_details">Additional Vehicle Details (if any)</label>
-                <textarea id="vehicle_details" name="vehicle_details" rows="2"></textarea>
+                <label for="vehicle_details">Additional Vehicle Details</label>
+                <textarea id="vehicle_details" name="vehicle_details" rows="1"></textarea>
             </div>
             <div class="form-group">
-                <label for="details">Any Additional Details?</label>
-                <textarea id="details" name="details" rows="3"></textarea>
+                <label for="details">Additional Comments</label>
+                <textarea id="details" name="details" rows="2"></textarea>
             </div>
-            <button type="submit">Send Request</button>
+            
+            <button type="submit">Submit Request</button>
         </form>
     </section>
 
     <footer>
-        <p>Thank you for completing the request to stay at PH18. <br>We will review availability and send a confirmation email.</p>
-        <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2026 albandb</p>
+        <p>PH18 &copy; 2026 albandb</p>
     </footer>
 
     <script>
@@ -516,11 +612,9 @@
         var currentIndex = 0;
 
         // --- Functions ---
-
-        // Open specific image by index
         function showImage(index) {
-            if (index >= galleryImages.length) { index = 0; } // Loop to start
-            if (index < 0) { index = galleryImages.length - 1; } // Loop to end
+            if (index >= galleryImages.length) { index = 0; } 
+            if (index < 0) { index = galleryImages.length - 1; } 
             
             currentIndex = index;
             modal.style.display = "flex";
@@ -529,26 +623,21 @@
         }
 
         // --- Event Listeners ---
-
-        // 1. Click on Gallery Image
         galleryImages.forEach(function(img, index) {
             img.onclick = function() {
                 showImage(index);
             }
         });
 
-        // 2. Click Close Button
         var span = document.getElementsByClassName("close")[0];
         span.onclick = function() { modal.style.display = "none"; }
 
-        // 3. Click Background to Close
         modal.onclick = function(event) {
             if (event.target === modal) { modal.style.display = "none"; }
         }
 
-        // 4. Click Next/Prev Buttons
         document.getElementById("prevBtn").onclick = function(e) {
-            e.stopPropagation(); // Prevent closing modal
+            e.stopPropagation(); 
             showImage(currentIndex - 1);
         }
         document.getElementById("nextBtn").onclick = function(e) {
@@ -556,7 +645,6 @@
             showImage(currentIndex + 1);
         }
 
-        // 5. Keyboard Navigation (Left, Right, Escape)
         document.addEventListener('keydown', function(event) {
             if (modal.style.display === "flex") {
                 if (event.key === "ArrowLeft") {
@@ -569,7 +657,6 @@
             }
         });
 
-        // --- Checkbox Validation ---
         const checkboxes = document.querySelectorAll('input[name="rooms[]"]');
         function validateCheckboxes() {
             const isChecked = Array.from(checkboxes).some(cb => cb.checked);
