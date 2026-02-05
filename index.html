@@ -43,24 +43,38 @@
         .nav-links a:hover { color: var(--primary); }
 
         /* Sections */
-        section { padding: 3rem 1rem; max-width: 800px; margin: 0 auto; }
+        section { padding: 3rem 1rem; max-width: 900px; margin: 0 auto; }
         h1, h2 { text-align: center; }
         
-        /* Gallery Placeholder */
+        /* Gallery Styles */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
             margin-top: 20px;
         }
         .gallery-item {
-            background: #ddd;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
+            background: #fff;
             border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-3px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-caption {
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
         }
 
         /* Calendar Responsive Wrapper */
@@ -71,6 +85,7 @@
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: #fff;
         }
         .calendar-wrapper iframe {
             position: absolute;
@@ -109,6 +124,7 @@
             width: 100%;
             font-size: 1.1rem;
             font-weight: bold;
+            transition: background 0.3s;
         }
         button:hover { background-color: #e04e53; }
 
@@ -125,6 +141,7 @@
         @media (max-width: 600px) {
             nav { flex-direction: column; gap: 10px; }
             .nav-links { margin-top: 10px; }
+            .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -142,16 +159,48 @@
 
     <section id="home">
         <h1>Welcome to PH18</h1>
-        <p style="text-align: center;">A comfortable stay awaits you.</p>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto;">A comfortable stay awaits you. View our gallery below or check the calendar for availability.</p>
     </section>
 
     <section id="gallery">
         <h2>Gallery</h2>
         <div class="gallery-grid">
-            <div class="gallery-item">Bedroom 1</div>
-            <div class="gallery-item">Living Room</div>
-            <div class="gallery-item">Kitchen</div>
-            <div class="gallery-item">Exterior</div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/075e93ce.jpg" alt="Marina View">
+                <div class="gallery-caption">Marina View</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/b5bf9943.jpg" alt="Sitting Room">
+                <div class="gallery-caption">Sitting Room</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/d6985984.jpg" alt="Terrace">
+                <div class="gallery-caption">Terrace</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/5cdb361c.jpg" alt="Kitchen">
+                <div class="gallery-caption">Kitchen</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/5793c68c.jpg" alt="Dining Room">
+                <div class="gallery-caption">Dining Room</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/724b79bf.jpg" alt="Master Bedroom">
+                <div class="gallery-caption">Master Bedroom</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/b15d8435.jpg" alt="Ensuite Bathroom">
+                <div class="gallery-caption">Ensuite Bathroom</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/c91c57c2.jpg" alt="Second Bedroom">
+                <div class="gallery-caption">Second Bedroom</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://albandb.com/assets/images/gallery01/6320cc80.jpg" alt="Second Bed Ensuite">
+                <div class="gallery-caption">Second Bed Ensuite</div>
+            </div>
         </div>
     </section>
 
@@ -169,13 +218,9 @@
         <form action="https://formsubmit.co/connect@sgmnd.org" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="_subject" value="New PH18 Stay Request">
-            
             <input type="hidden" name="_template" value="table">
-            
             <input type="text" name="_honey" style="display:none">
-            
             <input type="hidden" name="_captcha" value="false">
-
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
