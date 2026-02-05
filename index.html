@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PH18 Guest Stay Request</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; }
+    label { display: block; margin-top: 16px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 6px; }
+    button { margin-top: 24px; padding: 12px; font-size: 16px; }
+  </style>
+</head>
+
+<body>
+<h1>PH18 Guest Stay Request</h1>
+
+<form
+  action="https://formspree.io/f/YOUR_FORM_ID"
+  method="POST"
+  enctype="multipart/form-data"
+>
+
+<label>Your Name</label>
+<input type="text" name="first_name" placeholder="First Name" required />
+<input type="text" name="last_name" placeholder="Last Name" required />
+
+<label>Additional Guest Names</label>
+<textarea name="additional_guests"></textarea>
+
+<label>Phone Number</label>
+<input type="tel" name="phone" required />
+
+<label>Email</label>
+<input type="email" name="email" required />
+
+<label>Arrival Date & Time</label>
+<input type="datetime-local" name="arrival" required />
+
+<label>Departure Date & Time</label>
+<input type="datetime-local" name="departure" required />
+
+<label>Rooms Needed</label>
+<textarea name="rooms_needed" required></textarea>
+
+<label>License Plate Number</label>
+<input type="text" name="license_plate" />
+
+<label>Vehicle Make & Model</label>
+<input type="text" name="vehicle" />
+
+<label>Front of Driver’s License</label>
+<input type="file" name="license_front" accept="image/*" />
+
+<label>Back of Driver’s License</label>
+<input type="file" name="license_back" accept="image/*" />
+
+<label>Additional Vehicle Details</label>
+<textarea name="additional_vehicle"></textarea>
+
+<label>Any Additional Details?</label>
+<textarea name="notes"></textarea>
+
+<label>
+  <input type="checkbox" required /> I am human
+</label>
+
+<button type="submit">Send Request</button>
+
+</form>
+</body>
+</html>
