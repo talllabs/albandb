@@ -24,16 +24,13 @@
             color: var(--text-color);
         }
 
-        /* --- HERO SECTION (Matches Screenshot) --- */
+        /* --- HERO SECTION --- */
         header {
-            min-height: 100vh; /* Full screen height */
+            padding: 4rem 2rem 2rem 2rem;
+            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 2rem;
-            text-align: center;
-            box-sizing: border-box;
         }
 
         /* Circular Profile Image */
@@ -50,7 +47,7 @@
         /* Main Title */
         h1 {
             font-size: 4rem;
-            font-weight: 400; /* Roboto slightly thinner look */
+            font-weight: 400;
             letter-spacing: 2px;
             margin: 0;
             margin-bottom: 1.5rem;
@@ -62,41 +59,56 @@
             height: 1px;
             background-color: rgba(255,255,255,0.3);
             border: none;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
-        /* Button Grid (The 2x2 Layout) */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Two columns */
-            gap: 20px;
+        /* --- STICKY NAVIGATION BAR --- */
+        nav {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg-color);
+            padding: 1rem 0;
             width: 100%;
-            max-width: 800px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .nav-btn {
-            display: block;
-            padding: 15px 20px;
+            padding: 10px 20px;
             border: 1px solid white;
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            border-radius: 6px;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border-radius: 4px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
 
         /* --- CONTENT SECTIONS --- */
         section {
-            padding: 4rem 1.5rem;
+            padding: 5rem 1.5rem;
             max-width: 900px;
             margin: 0 auto;
+            scroll-margin-top: 80px; 
         }
 
         h2 {
@@ -109,27 +121,26 @@
             border-bottom: 1px solid rgba(255,255,255,0.2);
             padding-bottom: 1rem;
             display: inline-block;
-            /* Center the H2 visually */
             position: relative;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        /* Gallery Styles */
+        /* --- GALLERY GRID --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
         .gallery-item {
-            background: rgba(255,255,255,0.1); /* Slight transparent bg */
+            background: rgba(255,255,255,0.1);
             border-radius: 8px;
             overflow: hidden;
             transition: transform 0.3s;
+            cursor: pointer;
         }
         .gallery-item:hover {
             transform: scale(1.02);
-            z-index: 10;
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
         .gallery-item img {
@@ -145,7 +156,61 @@
             color: #ddd;
         }
 
-        /* Calendar Wrapper */
+        /* --- LIGHTBOX (Hidden by default) --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: zoom 0.3s;
+        }
+        #lightbox-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover, .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes zoom {
+            from {transform:scale(0)} 
+            to {transform:scale(1)}
+        }
+
+        /* --- CALENDAR --- */
         .calendar-wrapper {
             position: relative;
             padding-bottom: 75%;
@@ -153,7 +218,7 @@
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background: #fff; /* Needs white bg for the iframe to look right */
+            background: #fff; 
         }
         .calendar-wrapper iframe {
             position: absolute;
@@ -164,7 +229,7 @@
             border: 0;
         }
 
-        /* --- FORM STYLING (White Card for Readability) --- */
+        /* --- FORM --- */
         form {
             background: var(--form-bg);
             color: var(--form-text);
@@ -172,10 +237,8 @@
             border-radius: 8px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
-        
         .form-group { margin-bottom: 1.5rem; }
         label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-        
         input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"], textarea, select {
             width: 100%;
             padding: 12px;
@@ -185,10 +248,8 @@
             font-family: 'Roboto', sans-serif;
             font-size: 1rem;
         }
-        
-        /* Submit Button */
         button[type="submit"] {
-            background-color: var(--bg-color); /* Match theme */
+            background-color: var(--bg-color);
             color: white;
             padding: 15px 24px;
             border: none;
@@ -215,10 +276,10 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Mobile tweaks */
         @media (max-width: 600px) {
             h1 { font-size: 3rem; }
-            .nav-grid { grid-template-columns: 1fr; } /* Stack buttons on mobile */
+            .nav-container { flex-direction: row; justify-content: center; }
+            .nav-btn { font-size: 0.75rem; padding: 8px 12px; }
             form { padding: 1.5rem; }
         }
     </style>
@@ -227,18 +288,18 @@
 
     <header id="home">
         <img src="https://albandb.com/assets/images/image01.jpg" alt="Profile" class="profile-pic">
-        
         <h1>albandb</h1>
-        
         <hr class="divider">
-        
-        <nav class="nav-grid">
+    </header>
+
+    <nav>
+        <div class="nav-container">
             <a href="#home" class="nav-btn">Home</a>
             <a href="#gallery" class="nav-btn">Gallery</a>
-            <a href="#calendar" class="nav-btn">Calendar of Availability</a>
+            <a href="#calendar" class="nav-btn">Availability</a>
             <a href="#request" class="nav-btn">Request a Stay</a>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <section id="gallery">
         <h2>Gallery</h2>
@@ -278,6 +339,12 @@
         </div>
     </section>
 
+    <div id="myLightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="img01">
+        <div id="lightbox-caption"></div>
+    </div>
+
     <section id="calendar">
         <h2>Calendar of Availability</h2>
         <p style="text-align: center; margin-bottom: 30px;">Please check available dates before submitting a request.</p>
@@ -289,7 +356,7 @@
     <section id="request">
         <h2>Request a Stay</h2>
         
-        <form action="https://formsubmit.co/connect@sgmnd.org" method="POST" enctype="multipart/form-data">
+        <form action="https://formsubmit.co/167edc1ce87f4b42cd1a27aa2440735e" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="_subject" value="New PH18 Stay Request">
             <input type="hidden" name="_template" value="table">
@@ -351,7 +418,6 @@
             <div class="form-group">
                 <label for="id_front">Upload FRONT of Driver’s License</label>
                 <input type="file" id="id_front" name="id_front" accept="image/*,.pdf" required>
-                <div class="file-upload-note">Image or PDF format</div>
             </div>
 
             <div class="form-group">
@@ -375,8 +441,42 @@
 
     <footer>
         <p>Thank you for completing the request to stay at PH18. <br>We will review availability and send a confirmation email.</p>
-        <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2024 albandb</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2026 albandb</p>
     </footer>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myLightbox");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("lightbox-caption");
+
+        // Get all gallery items
+        var images = document.querySelectorAll(".gallery-item img");
+
+        // Loop through images to add click event
+        images.forEach(function(img) {
+            img.onclick = function(){
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // Also close if clicking outside the image
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
