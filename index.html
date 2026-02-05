@@ -3,65 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>albandb - Guest Stay Request</title>
+    <title>albandb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- CSS STYLES --- */
         :root {
-            --primary: #ff5a5f; /* Airbnb-ish red */
-            --dark: #222;
-            --light: #f7f7f7;
-            --white: #fff;
+            --bg-color: #363657; /* Dark purple from screenshot */
+            --text-color: #ffffff;
+            --accent: #ffffff;
+            --form-bg: #ffffff;
+            --form-text: #333333;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
-        
-        /* Navigation */
-        nav {
-            background: var(--white);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            margin-left: 20px;
-            font-weight: 500;
-        }
-        .nav-links a:hover { color: var(--primary); }
 
-        /* Sections */
-        section { padding: 3rem 1rem; max-width: 900px; margin: 0 auto; }
-        h1, h2 { text-align: center; }
-        
+        /* --- HERO SECTION (Matches Screenshot) --- */
+        header {
+            min-height: 100vh; /* Full screen height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Circular Profile Image */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Main Title */
+        h1 {
+            font-size: 4rem;
+            font-weight: 400; /* Roboto slightly thinner look */
+            letter-spacing: 2px;
+            margin: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Divider Line */
+        .divider {
+            width: 100px;
+            height: 1px;
+            background-color: rgba(255,255,255,0.3);
+            border: none;
+            margin-bottom: 3rem;
+        }
+
+        /* Button Grid (The 2x2 Layout) */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .nav-btn {
+            display: block;
+            padding: 15px 20px;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 1rem;
+            display: inline-block;
+            /* Center the H2 visually */
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         /* Gallery Styles */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            gap: 20px;
         }
         .gallery-item {
-            background: #fff;
+            background: rgba(255,255,255,0.1); /* Slight transparent bg */
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            transition: transform 0.3s;
         }
         .gallery-item:hover {
-            transform: translateY(-3px);
+            transform: scale(1.02);
+            z-index: 10;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
         .gallery-item img {
             width: 100%;
@@ -70,22 +139,21 @@
             display: block;
         }
         .gallery-caption {
-            padding: 10px;
+            padding: 15px;
             text-align: center;
             font-size: 0.9rem;
-            font-weight: 600;
-            color: #555;
+            color: #ddd;
         }
 
-        /* Calendar Responsive Wrapper */
+        /* Calendar Wrapper */
         .calendar-wrapper {
             position: relative;
-            padding-bottom: 75%; /* Aspect ratio */
+            padding-bottom: 75%;
             height: 0;
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #fff; /* Needs white bg for the iframe to look right */
         }
         .calendar-wrapper iframe {
             position: absolute;
@@ -96,71 +164,81 @@
             border: 0;
         }
 
-        /* Form Styling */
+        /* --- FORM STYLING (White Card for Readability) --- */
         form {
-            background: var(--white);
-            padding: 2rem;
+            background: var(--form-bg);
+            color: var(--form-text);
+            padding: 2.5rem;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
+        
         .form-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        
         input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"], textarea, select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box; 
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
         }
-        .file-upload-note { font-size: 0.85rem; color: #666; margin-top: 5px; }
         
-        button {
-            background-color: var(--primary);
+        /* Submit Button */
+        button[type="submit"] {
+            background-color: var(--bg-color); /* Match theme */
             color: white;
-            padding: 12px 24px;
+            padding: 15px 24px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-size: 1.1rem;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: background 0.3s;
+            margin-top: 1rem;
         }
-        button:hover { background-color: #e04e53; }
+        button[type="submit"]:hover { 
+            background-color: #4a4a75; 
+        }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            background: var(--dark);
-            color: var(--white);
-            margin-top: 2rem;
+            padding: 3rem;
             font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         /* Mobile tweaks */
         @media (max-width: 600px) {
-            nav { flex-direction: column; gap: 10px; }
-            .nav-links { margin-top: 10px; }
-            .gallery-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 3rem; }
+            .nav-grid { grid-template-columns: 1fr; } /* Stack buttons on mobile */
+            form { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">albandb</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#calendar">Calendar</a>
-            <a href="#request">Request a Stay</a>
-        </div>
-    </nav>
-
-    <section id="home">
-        <h1>Welcome to PH18</h1>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto;">A comfortable stay awaits you. View our gallery below or check the calendar for availability.</p>
-    </section>
+    <header id="home">
+        <img src="https://albandb.com/assets/images/image01.jpg" alt="Profile" class="profile-pic">
+        
+        <h1>albandb</h1>
+        
+        <hr class="divider">
+        
+        <nav class="nav-grid">
+            <a href="#home" class="nav-btn">Home</a>
+            <a href="#gallery" class="nav-btn">Gallery</a>
+            <a href="#calendar" class="nav-btn">Calendar of Availability</a>
+            <a href="#request" class="nav-btn">Request a Stay</a>
+        </nav>
+    </header>
 
     <section id="gallery">
         <h2>Gallery</h2>
@@ -197,23 +275,19 @@
                 <img src="https://albandb.com/assets/images/gallery01/c91c57c2.jpg" alt="Second Bedroom">
                 <div class="gallery-caption">Second Bedroom</div>
             </div>
-            <div class="gallery-item">
-                <img src="https://albandb.com/assets/images/gallery01/6320cc80.jpg" alt="Second Bed Ensuite">
-                <div class="gallery-caption">Second Bed Ensuite</div>
-            </div>
         </div>
     </section>
 
     <section id="calendar">
         <h2>Calendar of Availability</h2>
-        <p style="text-align: center; margin-bottom: 20px;">Please check available dates before submitting a request.</p>
+        <p style="text-align: center; margin-bottom: 30px;">Please check available dates before submitting a request.</p>
         <div class="calendar-wrapper">
             <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_bvrfcjlosao140avj16q306d2o@group.calendar.google.com&ctz=America/Los_Angeles"></iframe>
         </div>
     </section>
 
     <section id="request">
-        <h2>PH18 Guest Stay Request</h2>
+        <h2>Request a Stay</h2>
         
         <form action="https://formsubmit.co/connect@sgmnd.org" method="POST" enctype="multipart/form-data">
             
@@ -221,6 +295,7 @@
             <input type="hidden" name="_template" value="table">
             <input type="text" name="_honey" style="display:none">
             <input type="hidden" name="_captcha" value="false">
+
             <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
@@ -260,8 +335,8 @@
                 </div>
             </div>
 
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-            <h3>Vehicle & ID Information</h3>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+            <h3 style="margin-top:0; color: #333;">Vehicle & ID Information</h3>
 
             <div class="form-group">
                 <label for="plate">License Plate Number</label>
@@ -276,6 +351,7 @@
             <div class="form-group">
                 <label for="id_front">Upload FRONT of Driver’s License</label>
                 <input type="file" id="id_front" name="id_front" accept="image/*,.pdf" required>
+                <div class="file-upload-note">Image or PDF format</div>
             </div>
 
             <div class="form-group">
@@ -298,8 +374,11 @@
     </section>
 
     <footer>
-        <p>Thank you for completing the request to stay at PH18. <br>We will review availability and, if approved, send a confirmation email with check-in details and further instructions.</p>
+        <p>Thank you for completing the request to stay at PH18. <br>We will review availability and send a confirmation email.</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">&copy; 2024 albandb</p>
     </footer>
 
 </body>
 </html>
+
+```
