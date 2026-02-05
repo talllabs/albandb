@@ -248,6 +248,25 @@
             font-family: 'Roboto', sans-serif;
             font-size: 1rem;
         }
+        
+        /* Custom Checkbox Styling */
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .checkbox-label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .checkbox-label input {
+            width: auto; /* Reset width for checkboxes */
+            margin: 0;
+        }
+
         button[type="submit"] {
             background-color: var(--bg-color);
             color: white;
@@ -281,6 +300,7 @@
             .nav-container { flex-direction: row; justify-content: center; }
             .nav-btn { font-size: 0.75rem; padding: 8px 12px; }
             form { padding: 1.5rem; }
+            .checkbox-group { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -375,7 +395,7 @@
 
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="phone" name="phone">
             </div>
 
             <div class="form-group">
@@ -394,11 +414,16 @@
             </div>
 
             <div class="form-group">
-                <label>Please check which rooms you will need</label>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <label style="font-weight: normal;"><input type="checkbox" name="rooms[]" value="Master"> Master</label>
-                    <label style="font-weight: normal;"><input type="checkbox" name="rooms[]" value="Guest 1"> Guest 1</label>
-                    <label style="font-weight: normal;"><input type="checkbox" name="rooms[]" value="Guest 2"> Guest 2</label>
+                <label>Please check which rooms you will need <span style="font-weight:normal; font-size:0.8rem;">(Select at least one)</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="rooms[]" value="Master Bedroom & Bath"> 
+                        Master Bedroom & Bath
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="rooms[]" value="Guest Room & Bath"> 
+                        Guest Room & Bath
+                    </label>
                 </div>
             </div>
 
@@ -417,12 +442,12 @@
 
             <div class="form-group">
                 <label for="id_front">Upload FRONT of Driver’s License</label>
-                <input type="file" id="id_front" name="id_front" accept="image/*,.pdf" required>
+                <input type="file" id="id_front" name="id_front" accept="image/*,.pdf">
             </div>
 
             <div class="form-group">
                 <label for="id_back">Upload BACK of Driver’s License</label>
-                <input type="file" id="id_back" name="id_back" accept="image/*,.pdf" required>
+                <input type="file" id="id_back" name="id_back" accept="image/*,.pdf">
             </div>
 
             <div class="form-group">
@@ -445,15 +470,12 @@
     </footer>
 
     <script>
-        // Get the modal
+        // --- Lightbox Logic ---
         var modal = document.getElementById("myLightbox");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("lightbox-caption");
-
-        // Get all gallery items
         var images = document.querySelectorAll(".gallery-item img");
 
-        // Loop through images to add click event
         images.forEach(function(img) {
             img.onclick = function(){
                 modal.style.display = "flex";
@@ -462,20 +484,29 @@
             }
         });
 
-        // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() { 
-            modal.style.display = "none";
-        }
-
-        // Also close if clicking outside the image
+        span.onclick = function() { modal.style.display = "none"; }
         modal.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
+            if (event.target === modal) { modal.style.display = "none"; }
         }
+
+        // --- Checkbox Validation (Must select at least one) ---
+        const checkboxes = document.querySelectorAll('input[name="rooms[]"]');
+        
+        function validateCheckboxes() {
+            const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+            checkboxes.forEach(cb => {
+                // If nothing is checked, make them all required.
+                // If one is checked, remove required from all.
+                cb.required = !isChecked;
+            });
+        }
+
+        // Run checking on every click
+        checkboxes.forEach(cb => cb.addEventListener('change', validateCheckboxes));
+        
+        // Run once on load to set initial state
+        validateCheckboxes();
     </script>
 
 </body>
