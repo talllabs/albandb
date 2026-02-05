@@ -5,68 +5,115 @@
   <title>PH18 Guest Stay Request</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; }
-    label { display: block; margin-top: 16px; font-weight: bold; }
-    input, textarea, select { width: 100%; padding: 8px; margin-top: 6px; }
-    button { margin-top: 24px; padding: 12px; font-size: 16px; }
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    h1 {
+      margin-bottom: 8px;
+    }
+    p {
+      color: #555;
+    }
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 80px;
+    }
+    button {
+      margin-top: 28px;
+      padding: 14px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+    }
+    .checkbox {
+      margin-top: 16px;
+    }
   </style>
 </head>
 
 <body>
+
 <h1>PH18 Guest Stay Request</h1>
+<p>If you haven't already, you can check what dates are available before submitting this request.</p>
 
 <form
-  action="https://formspree.io/f/YOUR_FORM_ID"
+  name="ph18-guest-stay"
   method="POST"
+  data-netlify="true"
   enctype="multipart/form-data"
 >
 
-<label>Your Name</label>
-<input type="text" name="first_name" placeholder="First Name" required />
-<input type="text" name="last_name" placeholder="Last Name" required />
+  <!-- Required for Netlify -->
+  <input type="hidden" name="form-name" value="ph18-guest-stay" />
 
-<label>Additional Guest Names</label>
-<textarea name="additional_guests"></textarea>
+  <label>Your Name</label>
+  <input type="text" name="first_name" placeholder="First Name" required />
+  <input type="text" name="last_name" placeholder="Last Name" required />
 
-<label>Phone Number</label>
-<input type="tel" name="phone" required />
+  <label>Additional Guest Names</label>
+  <textarea name="additional_guests" placeholder="Enter names if applicable"></textarea>
 
-<label>Email</label>
-<input type="email" name="email" required />
+  <label>Phone Number</label>
+  <input type="tel" name="phone" placeholder="(000) 000-0000" required />
 
-<label>Arrival Date & Time</label>
-<input type="datetime-local" name="arrival" required />
+  <label>Email</label>
+  <input type="email" name="email" placeholder="example@example.com" required />
 
-<label>Departure Date & Time</label>
-<input type="datetime-local" name="departure" required />
+  <label>Arrival – Date and Time</label>
+  <input type="datetime-local" name="arrival" required />
 
-<label>Rooms Needed</label>
-<textarea name="rooms_needed" required></textarea>
+  <label>Departure – Date and Time</label>
+  <input type="datetime-local" name="departure" required />
 
-<label>License Plate Number</label>
-<input type="text" name="license_plate" />
+  <label>Please check which rooms you will need</label>
+  <textarea name="rooms_needed" required></textarea>
 
-<label>Vehicle Make & Model</label>
-<input type="text" name="vehicle" />
+  <label>License Plate Number</label>
+  <input type="text" name="license_plate" />
 
-<label>Front of Driver’s License</label>
-<input type="file" name="license_front" accept="image/*" />
+  <label>Make & Model of Vehicle</label>
+  <input type="text" name="vehicle" />
 
-<label>Back of Driver’s License</label>
-<input type="file" name="license_back" accept="image/*" />
+  <label>Upload FRONT of Driver’s License</label>
+  <input type="file" name="license_front" accept="image/*" />
 
-<label>Additional Vehicle Details</label>
-<textarea name="additional_vehicle"></textarea>
+  <label>Upload BACK of Driver’s License</label>
+  <input type="file" name="license_back" accept="image/*" />
 
-<label>Any Additional Details?</label>
-<textarea name="notes"></textarea>
+  <label>Additional Vehicle Details (if any)</label>
+  <textarea name="additional_vehicle"></textarea>
 
-<label>
-  <input type="checkbox" required /> I am human
-</label>
+  <label>Any Additional Details?</label>
+  <textarea name="notes"></textarea>
 
-<button type="submit">Send Request</button>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" required />
+      Please verify that you are human
+    </label>
+  </div>
+
+  <button type="submit">Send Request</button>
 
 </form>
+
+<p style="margin-top: 24px; font-size: 14px; color: #666;">
+Thank you for completing the request to stay at PH18. We will review availability and, if approved, send you a confirmation email with check-in details and further instructions.
+</p>
+
 </body>
 </html>
