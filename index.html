@@ -42,30 +42,39 @@
     .checkbox {
       margin-top: 16px;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 
 <body>
 
 <h1>PH18 Guest Stay Request</h1>
-<p>If you haven't already, you can check what dates are available before submitting this request.</p>
+<p>If you haven't already, please check available dates before submitting this request.</p>
 
 <form
   name="ph18-guest-stay"
   method="POST"
   data-netlify="true"
+  data-netlify-honeypot="bot-field"
   enctype="multipart/form-data"
 >
 
   <!-- Required for Netlify -->
   <input type="hidden" name="form-name" value="ph18-guest-stay" />
 
+  <!-- Honeypot field -->
+  <p class="hidden">
+    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+  </p>
+
   <label>Your Name</label>
   <input type="text" name="first_name" placeholder="First Name" required />
   <input type="text" name="last_name" placeholder="Last Name" required />
 
   <label>Additional Guest Names</label>
-  <textarea name="additional_guests" placeholder="Enter names if applicable"></textarea>
+  <textarea name="additional_guests"></textarea>
 
   <label>Phone Number</label>
   <input type="tel" name="phone" placeholder="(000) 000-0000" required />
@@ -112,7 +121,7 @@
 </form>
 
 <p style="margin-top: 24px; font-size: 14px; color: #666;">
-Thank you for completing the request to stay at PH18. We will review availability and, if approved, send you a confirmation email with check-in details and further instructions.
+Thank you for completing the request to stay at PH18. We will review availability and, if approved, send a confirmation email with check-in details and further instructions.
 </p>
 
 </body>
