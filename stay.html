@@ -1,668 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>albandb</title>
-    
-    <meta name="robots" content="noindex, nofollow">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        /* --- CSS STYLES --- */
-        :root {
-            --bg-color: #2e2e48; /* Dark purple background */
-            --text-color: #f4f4f4; /* Light text for main site */
-            --accent-gold: #d4af37; /* Luxury Gold */
-            --glass-bg: rgba(20, 20, 35, 0.6); 
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- HERO SECTION --- */
-        header {
-            padding: 6rem 2rem 4rem 2rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        /* Circular Profile Image */
-        .profile-pic {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 2rem;
-            border: 1px solid var(--accent-gold); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            padding: 5px; 
-        }
-
-        /* Main Title */
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 400;
-            letter-spacing: 5px; 
-            margin: 0;
-            margin-bottom: 1.5rem;
-            color: #fff;
-        }
-
-        /* Divider Line */
-        .divider {
-            width: 80px;
-            height: 2px;
-            background-color: var(--accent-gold);
-            border: none;
-            margin-bottom: 3rem;
-        }
-
-        /* --- STICKY NAVIGATION BAR --- */
-        nav {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(46, 46, 72, 0.95); 
-            backdrop-filter: blur(10px); 
-            padding: 1.2rem 0;
-            width: 100%;
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .nav-btn {
-            font-family: 'Montserrat', sans-serif;
-            padding: 8px 0;
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            border: none;
-        }
-
-        .nav-btn::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--accent-gold);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-btn:hover { color: #fff; }
-        .nav-btn:hover::after { width: 100%; }
-
-        /* --- CONTENT SECTIONS --- */
-        section {
-            padding: 6rem 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            scroll-margin-top: 80px; 
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            font-style: italic;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: #fff;
-            display: block;
-        }
-
-        /* --- GALLERY GRID --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2px; 
-        }
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            aspect-ratio: 1 / 1; 
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-            filter: brightness(0.9);
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-            filter: brightness(1);
-        }
-
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            color: #fff;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s ease;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        .gallery-item:hover .gallery-caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- LIGHTBOX --- */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            padding-top: 0;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(10, 10, 15, 0.95); 
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            backdrop-filter: blur(5px);
-        }
-        .lightbox-content {
-            margin: auto;
-            display: block;
-            max-width: 95%;
-            max-height: 85vh;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: zoom 0.4s ease-out;
-        }
-        #lightbox-caption {
-            margin-top: 20px;
-            color: var(--accent-gold);
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            font-style: italic;
-        }
-        .close {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            color: #fff;
-            font-size: 50px;
-            font-weight: 100;
-            transition: 0.3s;
-            cursor: pointer;
-            z-index: 2001;
-            line-height: 0.5;
-        }
-        .close:hover { color: var(--accent-gold); }
-        
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            padding: 20px;
-            margin-top: -30px;
-            color: rgba(255,255,255,0.5);
-            font-size: 30px;
-            transition: 0.3s ease;
-            user-select: none;
-            z-index: 2001;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .next { right: 30px; }
-        .prev { left: 30px; }
-        .prev:hover, .next:hover {
-            color: var(--accent-gold);
-            border-color: var(--accent-gold);
-            background: transparent;
-        }
-
-        @keyframes zoom {
-            from {transform:scale(0.95); opacity: 0;} 
-            to {transform:scale(1); opacity: 1;}
-        }
-
-        /* --- CALENDAR --- */
-        .calendar-wrapper {
-            position: relative;
-            padding-bottom: 60%;
-            height: 0;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            border: 1px solid var(--glass-border);
-        }
-        .calendar-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-            filter: grayscale(1) invert(0); 
-        }
-
-        /* --- FORM (UPDATED TO LIGHT MODE) --- */
-        form {
-            background: #ffffff; /* Pure white background */
-            color: #333333; /* Dark text */
-            padding: 4rem;
-            border-radius: 2px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3); /* Softer shadow */
-        }
-        .form-group { margin-bottom: 2.5rem; }
-        
-        label { 
-            display: block; 
-            margin-bottom: 0.8rem; 
-            font-size: 0.75rem; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            color: #777777; /* Grey labels */
-        }
-        
-        /* Light Mode Input Styles */
-        input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"], textarea, select {
-            width: 100%;
-            padding: 10px 0;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #cccccc; /* Light grey underline */
-            border-radius: 0;
-            box-sizing: border-box; 
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: #222222; /* Dark input text */
-            transition: border-color 0.3s;
-        }
-        
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-bottom-color: var(--accent-gold);
-        }
-
-        input[type="file"] {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            padding-top: 10px;
-        }
-        .checkbox-label {
-            font-weight: normal;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            color: #333;
-        }
-        .checkbox-label input {
-            width: auto; 
-            margin: 0;
-            accent-color: var(--accent-gold);
-            transform: scale(1.2);
-        }
-
-        button[type="submit"] {
-            background-color: var(--accent-gold); /* Gold filled button */
-            color: #fff;
-            padding: 18px 30px;
-            border: none;
-            border-radius: 0;
-            cursor: pointer;
-            width: 100%;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: all 0.4s ease;
-            margin-top: 2rem;
-        }
-        button[type="submit"]:hover { 
-            background-color: #b5952f; /* Darker gold on hover */
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            margin-top: 4rem;
-            border-top: 1px solid var(--glass-border);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 3rem; letter-spacing: 2px; }
-            .nav-container { flex-wrap: wrap; gap: 15px; }
-            .nav-btn { font-size: 0.7rem; }
-            section { padding: 4rem 1.5rem; }
-            form { padding: 2rem; }
-            .checkbox-group { flex-direction: column; gap: 15px; }
-            .prev, .next { width: 40px; height: 40px; font-size: 20px; padding: 0; }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>PH18 Check-In Details</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+  }
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  h1 { font-size: 24px; margin-bottom: 10px; }
+  h2 { margin-top: 30px; font-size: 18px; }
+  p, li { color: #444; line-height: 1.6; }
+  ul { padding-left: 20px; }
+  .hidden { display:none; }
+  input { padding:10px; margin-right:10px; }
+  button { padding:10px 15px; cursor:pointer; }
+  .code { background:#f0f0f0; padding:10px; border-radius:6px; display:inline-block; }
+</style>
 </head>
+
 <body>
 
-    <header id="home">
-        <img src="https://i.imgur.com/MolceUh.png" alt="Profile" class="profile-pic">
-        <h1>albandb</h1>
-        <hr class="divider">
-    </header>
+<div class="container" id="login">
+  <h1>PH18 Access</h1>
+  <input type="password" id="pw" placeholder="Enter password">
+  <button onclick="checkPassword()">Enter</button>
+  <p id="error" style="color:red;"></p>
+</div>
 
-    <nav>
-        <div class="nav-container">
-            <a href="#home" class="nav-btn">Home</a>
-            <a href="#gallery" class="nav-btn">Gallery</a>
-            <a href="#calendar" class="nav-btn">Availability</a>
-            <a href="#request" class="nav-btn">Request a Stay</a>
-        </div>
-    </nav>
+<div class="container hidden" id="content">
 
-    <section id="gallery">
-        <h2>The Gallery</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/075e93ce.jpg" alt="Marina View">
-                <div class="gallery-caption">Marina View</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/b8c2e52f.jpg" alt="Interior View">
-                <div class="gallery-caption">Interior View</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/ef3d1289.jpg" alt="Sitting Room">
-                <div class="gallery-caption">Sitting Room</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/b5bf9943.jpg" alt="Sitting Room">
-                <div class="gallery-caption">Sitting Room</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/d6985984.jpg" alt="Outdoor Area">
-                <div class="gallery-caption">Outdoor Area</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/cd59a0ab.jpg" alt="Dining Area">
-                <div class="gallery-caption">Dining Area</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/5cdb361c.jpg" alt="Kitchen">
-                <div class="gallery-caption">Kitchen</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/5793c68c.jpg" alt="Dining Area">
-                <div class="gallery-caption">Dining Area</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/cf4e5df5.jpg" alt="Ground Floor Bathroom">
-                <div class="gallery-caption">Ground Floor Bathroom</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/724b79bf.jpg" alt="Master Bedroom">
-                <div class="gallery-caption">Master Bedroom</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/b15d8435.jpg" alt="Ensuite Bathroom">
-                <div class="gallery-caption">Ensuite Bathroom</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/9d2be4a3.jpg" alt="Master Ensuite">
-                <div class="gallery-caption">Master Ensuite</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/c91c57c2.jpg" alt="Guest Bedroom">
-                <div class="gallery-caption">Guest Bedroom</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/6320cc80.jpg" alt="Guest Bedroom Ensuite">
-                <div class="gallery-caption">Guest Bedroom Ensuite</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/b6a575ec.jpg" alt="Marina View">
-                <div class="gallery-caption">Marina View</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/c5aec6ad.jpg" alt="Aerial View">
-                <div class="gallery-caption">Aerial View</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://albandb.carrd.co/assets/images/gallery01/548ee2a4.jpg" alt="Aerial View">
-                <div class="gallery-caption">Aerial View</div>
-            </div>
-        </div>
-    </section>
+<h1>Check-In & Stay Details — PH18</h1>
 
-    <div id="myLightbox" class="lightbox">
-        <span class="close">&times;</span>
-        <div class="prev" id="prevBtn">&#10094;</div>
-        <div class="next" id="nextBtn">&#10095;</div>
-        <img class="lightbox-content" id="img01">
-        <div id="lightbox-caption"></div>
-    </div>
+<h2>Address</h2>
+<p>
+4314 Marina City Drive, PH18<br>
+Marina del Rey, California 90292, USA
+</p>
 
-    <section id="calendar">
-        <h2>Availability</h2>
-        <p style="text-align: center; margin-bottom: 40px; font-family: 'Montserrat'; font-size: 0.9rem; color: rgba(255,255,255,0.7);">Please review available dates below.</p>
-        <div class="calendar-wrapper">
-            <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_bvrfcjlosao140avj16q306d2o@group.calendar.google.com&ctz=America/Los_Angeles"></iframe>
-        </div>
-    </section>
+<p><strong>Security is onsite</strong> for any building issues (elevators, access, etc.).</p>
 
-    <section id="request">
-        <h2>Request a Stay</h2>
-        <form action="https://formsubmit.co/167edc1ce87f4b42cd1a27aa2440735e" method="POST" enctype="multipart/form-data">
-            
-            <input type="hidden" name="_subject" value="New PH18 Stay Request">
-            <input type="hidden" name="_template" value="table">
-            <input type="text" name="_honey" style="display:none">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://albanb.com">
+<h2>Check-In</h2>
+<ul>
+<li>Stop at security gate</li>
+<li>Give your name + destination (PH18)</li>
+<li>Proceed straight toward Center Tower</li>
+</ul>
 
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="guests">Additional Guest Names</label>
-                <textarea id="guests" name="guests" rows="1"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                <div class="form-group">
-                    <label for="arrival">Arrival Date & Time</label>
-                    <input type="datetime-local" id="arrival" name="arrival" required>
-                </div>
-                <div class="form-group">
-                    <label for="departure">Departure Date & Time</label>
-                    <input type="datetime-local" id="departure" name="departure" required>
-                </div>
-            </div>
+<h2>Parking</h2>
+<ul>
+<li>Enter tower → turn left at stop sign</li>
+<li>First immediate right: Spot #258</li>
+<li>Backup: Spot #264</li>
+<li>You can move the “No Parking” sign</li>
+</ul>
 
-            <div class="form-group">
-                <label>Room Selection <span style="font-weight:normal; opacity: 0.5; text-transform:none;">(Select at least one)</span></label>
-                <div class="checkbox-group">
-                    <label class="checkbox-label"><input type="checkbox" name="rooms[]" value="Master Bedroom & Bath"> Master Bedroom & Bath</label>
-                    <label class="checkbox-label"><input type="checkbox" name="rooms[]" value="Guest Room & Bath"> Guest Room & Bath</label>
-                </div>
-            </div>
-            
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 50px 0;">
-            
-            <h3 style="margin: 0 0 30px 0; font-family: 'Playfair Display'; font-weight: 400; font-size: 1.5rem; color: #333;">Vehicle & ID Details</h3>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                <div class="form-group">
-                    <label for="plate">License Plate</label>
-                    <input type="text" id="plate" name="license_plate">
-                </div>
-                <div class="form-group">
-                    <label for="car_model">Vehicle Make/Model</label>
-                    <input type="text" id="car_model" name="vehicle_model">
-                </div>
-            </div>
+<h2>Building Access</h2>
+<ul>
+<li>Elevator is directly across from parking</li>
+<li>Go to Penthouse (PH) level</li>
+<li>Exit elevator → left → PH18</li>
+</ul>
 
-            <div class="form-group">
-                <label for="id_front">Driver’s License (Front)</label>
-                <input type="file" id="id_front" name="id_front" accept="image/*,.pdf">
-            </div>
-            <div class="form-group">
-                <label for="id_back">Driver’s License (Back)</label>
-                <input type="file" id="id_back" name="id_back" accept="image/*,.pdf">
-            </div>
-            <div class="form-group">
-                <label for="vehicle_details">Additional Vehicle Details</label>
-                <textarea id="vehicle_details" name="vehicle_details" rows="1"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="details">Additional Comments</label>
-                <textarea id="details" name="details" rows="2"></textarea>
-            </div>
-            
-            <button type="submit">Submit Request</button>
-        </form>
-    </section>
+<h2>Door Code</h2>
+<p class="code">98765432</p>
+<ul>
+<li>Hold keypad until numbers light up</li>
+<li>Enter code + press circle button</li>
+<li>If it doesn’t open → pull door tight and retry</li>
+</ul>
 
-    <footer>
-        <p>PH18 &copy; 2026 albandb</p>
-    </footer>
+<h2>Lock Instructions</h2>
+<ul>
+<li>Do NOT manually lock</li>
+<li>Door auto-locks</li>
+<li>To exit → turn top LOCKLY to unlock</li>
+<li>Ensure door fully shuts behind you</li>
+</ul>
 
-    <script>
-        // --- Lightbox Variables ---
-        var modal = document.getElementById("myLightbox");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("lightbox-caption");
-        var galleryImages = document.querySelectorAll(".gallery-item img");
-        var currentIndex = 0;
+<h2>WiFi</h2>
+<p>Spectrum Set-up-15<br><strong>Password:</strong> awaybeer490</p>
 
-        // --- Functions ---
-        function showImage(index) {
-            if (index >= galleryImages.length) { index = 0; } 
-            if (index < 0) { index = galleryImages.length - 1; } 
-            
-            currentIndex = index;
-            modal.style.display = "flex";
-            modalImg.src = galleryImages[currentIndex].src;
-            captionText.innerHTML = galleryImages[currentIndex].alt;
-        }
+<h2>Important Notes</h2>
+<ul>
+<li><strong>Do NOT operate shades</strong></li>
+<li>Close patio door when leaving</li>
+<li>Use correct downstairs thermostat (under stairs)</li>
+</ul>
 
-        // --- Event Listeners ---
-        galleryImages.forEach(function(img, index) {
-            img.onclick = function() {
-                showImage(index);
-            }
-        });
+<h2>Amenities</h2>
+<ul>
+<li>No coffee maker — electric kettle provided</li>
+<li>Cafe downstairs for coffee, snacks, sandwiches</li>
+</ul>
 
-        var span = document.getElementsByClassName("close")[0];
-        span.onclick = function() { modal.style.display = "none"; }
+<h2>Pool</h2>
+<ul>
+<li>Past cafe → left → stairs up</li>
+<li>No key needed</li>
+</ul>
 
-        modal.onclick = function(event) {
-            if (event.target === modal) { modal.style.display = "none"; }
-        }
+<h2>Nearby</h2>
+<ul>
+<li>Restaurants: Salt, Beachside</li>
+<li>Shopping: Marina Waterside (Ralph’s, Mendocino Farms)</li>
+</ul>
 
-        document.getElementById("prevBtn").onclick = function(e) {
-            e.stopPropagation(); 
-            showImage(currentIndex - 1);
-        }
-        document.getElementById("nextBtn").onclick = function(e) {
-            e.stopPropagation();
-            showImage(currentIndex + 1);
-        }
+<h2>Laundry</h2>
+<ul>
+<li>Located upstairs in closet</li>
+<li>Towels provided</li>
+</ul>
 
-        document.addEventListener('keydown', function(event) {
-            if (modal.style.display === "flex") {
-                if (event.key === "ArrowLeft") {
-                    showImage(currentIndex - 1);
-                } else if (event.key === "ArrowRight") {
-                    showImage(currentIndex + 1);
-                } else if (event.key === "Escape") {
-                    modal.style.display = "none";
-                }
-            }
-        });
+<h2>Trash</h2>
+<ul>
+<li>In-unit: under sink</li>
+<li>Building: behind “Electrical Room” near elevator</li>
+<li>Please take out trash before leaving</li>
+</ul>
 
-        const checkboxes = document.querySelectorAll('input[name="rooms[]"]');
-        function validateCheckboxes() {
-            const isChecked = Array.from(checkboxes).some(cb => cb.checked);
-            checkboxes.forEach(cb => {
-                cb.required = !isChecked;
-            });
-        }
-        checkboxes.forEach(cb => cb.addEventListener('change', validateCheckboxes));
-        validateCheckboxes();
-    </script>
+<h2>Cleaning</h2>
+<p>Professionally cleaned. Additional cleaning available: $250</p>
+
+<h2>Linens</h2>
+<p>Leave on bed after departure</p>
+
+<h2>Links</h2>
+<p>
+Availability + Photos:<br>
+http://ph18.life
+</p>
+
+</div>
+
+<script>
+function checkPassword() {
+  if (document.getElementById("pw").value === "90262") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("content").classList.remove("hidden");
+  } else {
+    document.getElementById("error").innerText = "Incorrect password";
+  }
+}
+</script>
 
 </body>
 </html>
