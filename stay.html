@@ -1,145 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PH18 Check-In Details</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PH18 Guest Check-In Information</title>
+
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f7f7f7;
-    margin: 0;
-  }
-  .container {
-    max-width: 800px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  }
-  h1 { font-size: 24px; margin-bottom: 10px; }
-  h2 { margin-top: 30px; font-size: 18px; }
-  p, li { color: #444; line-height: 1.6; }
-  ul { padding-left: 20px; }
-  .hidden { display:none; }
-  input { padding:10px; margin-right:10px; }
-  button { padding:10px 15px; cursor:pointer; }
-  .code { background:#f0f0f0; padding:10px; border-radius:6px; display:inline-block; }
+body { font-family: Arial, sans-serif; background:#f6f5f2; margin:0; }
+.wrap { max-width:900px; margin:40px auto; padding:0 20px; }
+.card { background:#fff; border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,.08); overflow:hidden; }
+.hero { background:#1f4b6e; color:#fff; padding:30px; }
+.content { padding:28px; }
+.hidden { display:none; }
+
+h1 { margin:0 0 10px; }
+h2 { margin-top:30px; color:#1f4b6e; }
+
+ul { padding-left:20px; line-height:1.6; }
+li { margin-bottom:8px; }
+
+input { padding:12px; }
+button { padding:12px 16px; background:#1f4b6e; color:#fff; border:none; cursor:pointer; }
+
+.code { background:#111; color:#fff; padding:10px 14px; border-radius:8px; display:inline-block; }
+
+.img {
+  margin:15px 0;
+}
+.img img {
+  width:100%;
+  border-radius:10px;
+}
+.caption {
+  font-size:13px;
+  color:#666;
+  margin-top:5px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container" id="login">
-  <h1>PH18 Access</h1>
-  <input type="password" id="pw" placeholder="Enter password">
-  <button onclick="checkPassword()">Enter</button>
-  <p id="error" style="color:red;"></p>
+<div class="wrap">
+<div class="card">
+
+<div class="hero">
+<h1>Welcome to PH18</h1>
+<p>Everything you need for arrival, access, and your stay.</p>
 </div>
 
-<div class="container hidden" id="content">
+<div class="content" id="login">
+<h2>Enter Password</h2>
+<input type="password" id="pw">
+<button onclick="checkPassword()">Enter</button>
+<p id="error" style="color:red;"></p>
+</div>
 
-<h1>Check-In & Stay Details — PH18</h1>
+<div class="content hidden" id="content">
 
-<h2>Address</h2>
-<p>
-4314 Marina City Drive, PH18<br>
-Marina del Rey, California 90292, USA
-</p>
-
-<p><strong>Security is onsite</strong> for any building issues (elevators, access, etc.).</p>
-
-<h2>Check-In</h2>
+<h2>Arrival</h2>
 <ul>
 <li>Stop at security gate</li>
-<li>Give your name + destination (PH18)</li>
+<li>Give your name + PH18</li>
 <li>Proceed straight toward Center Tower</li>
 </ul>
 
+<div class="img">
+<img src="/images/Proceed straight ahead towards Center Tower for parking.png">
+<div class="caption">Drive straight toward Center Tower after the gate</div>
+</div>
+
 <h2>Parking</h2>
 <ul>
-<li>Enter tower → turn left at stop sign</li>
-<li>First immediate right: Spot #258</li>
-<li>Backup: Spot #264</li>
-<li>You can move the “No Parking” sign</li>
+<li>Enter tower → turn LEFT at stop sign</li>
+<li>Immediately on your RIGHT: #258</li>
+<li>Backup spot: #264</li>
 </ul>
+
+<div class="img">
+<img src="/images/Enter the Tower and Turn Left at the Stop Sign towards parking.png">
+<div class="caption">Turn left here toward parking</div>
+</div>
+
+<div class="img">
+<img src="/images/“No Parking” sign and just a couple spots down is also #264.png">
+<div class="caption">Parking spots #258 and #264</div>
+</div>
 
 <h2>Building Access</h2>
 <ul>
-<li>Elevator is directly across from parking</li>
-<li>Go to Penthouse (PH) level</li>
-<li>Exit elevator → left → PH18</li>
+<li>Elevator is across from parking</li>
+<li>Go to PH level</li>
+<li>Turn LEFT → PH18</li>
 </ul>
+
+<div class="img">
+<img src="/images/When you arrive at Penthouse PH level you will take a left from the elevator lobby and head to PH18.png">
+<div class="caption">Turn left at PH level to reach PH18</div>
+</div>
 
 <h2>Door Code</h2>
 <p class="code">98765432</p>
-<ul>
-<li>Hold keypad until numbers light up</li>
-<li>Enter code + press circle button</li>
-<li>If it doesn’t open → pull door tight and retry</li>
-</ul>
 
-<h2>Lock Instructions</h2>
 <ul>
-<li>Do NOT manually lock</li>
-<li>Door auto-locks</li>
-<li>To exit → turn top LOCKLY to unlock</li>
-<li>Ensure door fully shuts behind you</li>
+<li>Hold keypad → enter code → press circle</li>
+<li>If it fails → pull door tight and retry</li>
 </ul>
 
 <h2>WiFi</h2>
-<p>Spectrum Set-up-15<br><strong>Password:</strong> awaybeer490</p>
+<p><strong>Spectrum Set-up-15</strong><br>awaybeer490</p>
 
-<h2>Important Notes</h2>
+<h2>Important</h2>
 <ul>
-<li><strong>Do NOT operate shades</strong></li>
+<li>Do NOT touch shades</li>
 <li>Close patio door when leaving</li>
-<li>Use correct downstairs thermostat (under stairs)</li>
+<li>Do NOT manually lock door</li>
 </ul>
 
 <h2>Amenities</h2>
 <ul>
-<li>No coffee maker — electric kettle provided</li>
-<li>Cafe downstairs for coffee, snacks, sandwiches</li>
+<li>No coffee maker (kettle provided)</li>
+<li>Cafe downstairs</li>
+<li>Pool near cafe (no key needed)</li>
 </ul>
-
-<h2>Pool</h2>
-<ul>
-<li>Past cafe → left → stairs up</li>
-<li>No key needed</li>
-</ul>
-
-<h2>Nearby</h2>
-<ul>
-<li>Restaurants: Salt, Beachside</li>
-<li>Shopping: Marina Waterside (Ralph’s, Mendocino Farms)</li>
-</ul>
-
-<h2>Laundry</h2>
-<ul>
-<li>Located upstairs in closet</li>
-<li>Towels provided</li>
-</ul>
-
-<h2>Trash</h2>
-<ul>
-<li>In-unit: under sink</li>
-<li>Building: behind “Electrical Room” near elevator</li>
-<li>Please take out trash before leaving</li>
-</ul>
-
-<h2>Cleaning</h2>
-<p>Professionally cleaned. Additional cleaning available: $250</p>
-
-<h2>Linens</h2>
-<p>Leave on bed after departure</p>
 
 <h2>Links</h2>
-<p>
-Availability + Photos:<br>
-http://ph18.life
-</p>
+<p>http://ph18.life</p>
 
+</div>
+
+</div>
 </div>
 
 <script>
