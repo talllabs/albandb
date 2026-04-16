@@ -33,7 +33,6 @@ h1 {
     font-family:'Playfair Display',serif;
     font-size:3.5rem;
     letter-spacing:4px;
-    margin:0;
 }
 
 .divider {
@@ -63,56 +62,62 @@ h2 {
     margin-top:30px;
 }
 
-p { line-height:1.7; }
-
 ul { padding-left:20px; }
 
 .code {
     background:#000;
-    padding:10px 14px;
+    padding:10px;
     display:inline-block;
-    margin:10px 0;
 }
 
 .img {
-    margin:20px 0;
     text-align:center;
+    margin:20px 0;
 }
 
 .img img {
     width:50%;
     max-width:400px;
     border-radius:10px;
-}
-
-.note {
-    border-left:2px solid var(--gold);
-    padding-left:12px;
-    margin-top:10px;
-    color:#ccc;
+    cursor:pointer;
 }
 
 .hidden { display:none; }
 
-input {
-    background:transparent;
-    border:none;
-    border-bottom:1px solid rgba(255,255,255,0.3);
-    color:#fff;
-    padding:10px;
+/* LIGHTBOX */
+.lightbox {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.95);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
 }
-
-button {
-    border:1px solid var(--gold);
-    background:transparent;
-    color:var(--gold);
-    padding:10px 15px;
+.lightbox img {
+    max-width:90%;
+    max-height:85%;
+}
+.close {
+    position:absolute;
+    top:30px;
+    right:40px;
+    font-size:40px;
+    color:white;
     cursor:pointer;
 }
-button:hover {
-    background:var(--gold);
-    color:#000;
+.prev, .next {
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+    padding:15px;
 }
+.prev { left:20px; }
+.next { right:20px; }
 </style>
 </head>
 
@@ -148,161 +153,67 @@ Country: US<br>
 Postal Code: 90292
 </p>
 
-<p>Building Management and Security (at the gate) are onsite and available should there be issues/concerns with building/grounds, i.e elevators, etc.</p>
-
-<h2>Check-in at Security Gate</h2>
+<h2>Check-in</h2>
 <ul>
-<li>Give guard your name and where you are going</li>
-<li>Proceed straight ahead towards Center Tower for parking</li>
+<li>Give guard your name</li>
+<li>Proceed straight toward Center Tower</li>
 </ul>
 
-<div class="img">
-<img src="/images/Proceed straight ahead towards Center Tower for parking.png">
-</div>
+<div class="img"><img src="/images/Proceed straight ahead towards Center Tower for parking.png" class="lightbox-img"></div>
 
-<h2>PARKING</h2>
+<h2>Parking</h2>
 <ul>
-<li>Enter the Tower and Turn Left at the Stop Sign towards parking</li>
-<li>On your IMMEDIATE right (after turning left at the stop sign) the first parking spot is #258</li>
-<li>You can move the “No Parking” sign</li>
-<li>A couple spots down is also #264</li>
+<li>Turn LEFT at stop sign</li>
+<li>Spot #258 or #264</li>
 </ul>
 
-<div class="img">
-<img src="/images/Enter the Tower and Turn Left at the Stop Sign towards parking.png">
-</div>
+<div class="img"><img src="/images/Enter the Tower and Turn Left at the Stop Sign towards parking.png" class="lightbox-img"></div>
+<div class="img"><img src="/images/more.png" class="lightbox-img"></div>
 
-<div class="img">
-<img src="/images/more.png">
-</div>
+<h2>Building Access</h2>
 
-<h2>BUILDING ACCESS</h2>
-<p>
-Directly across from the parking is the elevator to the Penthouse PH.<br>
-When you arrive at Penthouse PH level you will take a left from the elevator lobby and head to PH18.
-</p>
+<div class="img"><img src="/images/When you arrive at Penthouse PH level you will take a left from the elevator lobby and head to PH18.png" class="lightbox-img"></div>
 
-<div class="img">
-<img src="/images/When you arrive at Penthouse PH level you will take a left from the elevator lobby and head to PH18.png">
-</div>
+<h2>Door Code</h2>
 
-<h2>DOOR CODE</h2>
-
-<div class="img">
-<img src="/images/DOOR CODE .png">
-</div>
+<div class="img"><img src="/images/DOOR CODE .png" class="lightbox-img"></div>
 
 <div class="code">98765432</div>
 
-<div class="img">
-<img src="/images/Then enter code and the circular button at the end. .png">
-</div>
+<div class="img"><img src="/images/Then enter code and the circular button at the end. .png" class="lightbox-img"></div>
 
-<p class="note">
-TIP: If you have difficulty opening the door, pull the door tightly toward you and try again.
-</p>
+<h2>Lock</h2>
 
-<h2>LOCK</h2>
+<div class="img"><img src="/images/DO NOT manually turn the lock..png" class="lightbox-img"></div>
 
-<div class="img">
-<img src="/images/DO NOT manually turn the lock..png">
-</div>
+<h2>WiFi</h2>
+<p>Spectrum Set-up-15<br>awaybeer490</p>
 
-<p>
-Note: the LOCKLY keypad will automatically lock the door.<br>
-DO NOT manually turn the lock.
-</p>
-
-<p>
-Exiting: manually unlock using the top LOCKLY. The door will auto-lock after you exit.
-</p>
-
-<h2>CLEANING</h2>
-<p>
-The unit has been professionally cleaned.<br>
-Additional cleaning available: $250
-</p>
-
-<h2>WIFI</h2>
-<p>
-Spectrum Set-up-15<br>
-PW = awaybeer490
-</p>
-
-<div class="img">
-<img src="/images/wifi.png">
-</div>
-
-<h2>SHADES</h2>
-<p>***Please DO NOT open/close the shades. Leave them in the open position.***</p>
-
-<h2>Patio</h2>
-<p>Close the patio door when leaving.</p>
-
-<h2>Air Conditioning/Heat</h2>
-<p>
-Thermostats on both levels.<br>
-Use downstairs unit under stairs.<br>
-Do NOT use thermostat near windows.
-</p>
-
-<h2>Amenities</h2>
-<p>
-No coffee maker.<br>
-Electric kettle provided.<br>
-Cafe downstairs.
-</p>
+<div class="img"><img src="/images/wifi.png" class="lightbox-img"></div>
 
 <h2>Cafe</h2>
 
-<div class="img">
-<img src="/images/second right to exit parking garage and a third right at the stop sign, follow the sidewalk to the Cafe. .png">
-</div>
+<div class="img"><img src="/images/second right to exit parking garage and a third right at the stop sign, follow the sidewalk to the Cafe. .png" class="lightbox-img"></div>
 
 <h2>Pool</h2>
 
-<div class="img">
-<img src="/images/Backside of stairs catty-corner from cafe.png">
-</div>
+<div class="img"><img src="/images/Backside of stairs catty-corner from cafe.png" class="lightbox-img"></div>
+<div class="img"><img src="/images/Front side of stairs leading to pool are.png" class="lightbox-img"></div>
 
-<div class="img">
-<img src="/images/Front side of stairs leading to pool are.png">
-</div>
+<h2>Trash</h2>
 
-<p>No key needed.</p>
-
-<h2>Restaurants</h2>
-<p>Salt<br>Beachside</p>
-
-<h2>Shopping</h2>
-<p>
-Marina Waterside Shopping Center<br>
-4700 Admiralty Way
-</p>
-
-<h2>Laundry and Towels</h2>
-<p>Upstairs closet. Towels provided.</p>
-
-<h2>Trash & Recycling</h2>
-
-<div class="img">
-<img src="/images/In-Unit Trash is below the sink area.png">
-</div>
-
-<div class="img">
-<img src="/images/The trash and recycling is off of the elevator lobby behind the “Electrical Room” door as shown in the images below..png">
-</div>
-
-<p>Please empty trash before leaving.</p>
-
-<h2>LINENS</h2>
-<p>Leave on bed after departure.</p>
-
-<h2>LINKS</h2>
-<p>http://ph18.life</p>
+<div class="img"><img src="/images/In-Unit Trash is below the sink area.png" class="lightbox-img"></div>
 
 </div>
 </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+<span class="close">&times;</span>
+<div class="prev">&#10094;</div>
+<div class="next">&#10095;</div>
+<img id="lightbox-img">
 </div>
 
 <script>
@@ -314,6 +225,41 @@ function checkPassword() {
     document.getElementById("error").innerText = "Incorrect password";
   }
 }
+
+// LIGHTBOX
+const imgs = document.querySelectorAll('.lightbox-img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+let current = 0;
+
+imgs.forEach((img, i) => {
+  img.onclick = () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+    current = i;
+  };
+});
+
+document.querySelector('.close').onclick = () => lightbox.style.display = 'none';
+
+document.querySelector('.prev').onclick = () => {
+  current = (current - 1 + imgs.length) % imgs.length;
+  lightboxImg.src = imgs[current].src;
+};
+
+document.querySelector('.next').onclick = () => {
+  current = (current + 1) % imgs.length;
+  lightboxImg.src = imgs[current].src;
+};
+
+document.addEventListener('keydown', e => {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'ArrowLeft') document.querySelector('.prev').onclick();
+    if (e.key === 'ArrowRight') document.querySelector('.next').onclick();
+    if (e.key === 'Escape') lightbox.style.display = 'none';
+  }
+});
 </script>
 
 </body>
